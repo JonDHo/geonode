@@ -33,8 +33,13 @@
 {% if user.is_authenticated %}
 {% if user == profile %}
   {% for group in profile.group_list_all %}
-  <div ng-if="group.logo != ''" class="col-xs-1 pull-right group-logo">
-    <a href="{{ group.get_absolute_url }}" ><img src="/uploaded/{{ group.logo }}" alt="{{ group.title }}" /></a>
+  <div class="col-xs-1 pull-right group-logo">
+    <a href="{{ group.get_absolute_url }}" >
+      <span ng-switch on="group.logo">
+        <p ng-switch-when="">{{ group.title }}</p>
+        <span ng-switch-default><img src="/uploaded/{{ group.logo }}" alt="Group: {{ group.title }}" title="Group: {{ group.title }}"/></span>
+      </span>
+    </a>
   </div>
   <!-- <div class="col-xs-6 col-md-8">
     <h5>
@@ -45,8 +50,13 @@
   {% endfor %}
 {% else %}
   {% for group in profile.group_list_public %}
-  <div ng-if="group.logo != ''" class="col-xs-1 pull-right group-logo">
-    <a href="{{ group.get_absolute_url }}" ><img src="/uploaded/{{ group.logo }}" alt="{{ group.title }}" /></a>
+  <div class="col-xs-1 pull-right group-logo">
+    <a href="{{ group.get_absolute_url }}" >
+      <span ng-switch on="group.logo">
+        <p ng-switch-when="">{{ group.title }}</p>
+        <span ng-switch-default><img src="/uploaded/{{ group.logo }}" alt="Group: {{ group.title }}" title="Group: {{ group.title }}"/></span>
+      </span>
+    </a>
   </div>
   <!-- <div class="col-xs-6 col-md-8">
     <h5>
